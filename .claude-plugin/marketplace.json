@@ -9,7 +9,7 @@
       "name": "16-minds",
       "source": "./",
       "description": "Summon 16 personality-type agents to debate any topic, review code, or stress-test ideas",
-      "version": "0.2.0"
+      "version": "0.3.0"
     }
   ]
 }
