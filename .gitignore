@@ -11,3 +11,6 @@ desktop.ini
 
 # Logs
 *.log
+
+# /minds --save runtime output (timestamped files only — curated examples in Outputs/ are tracked)
+Outputs/[0-9]*-minds-*.md
