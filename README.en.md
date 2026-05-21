@@ -4,11 +4,11 @@
 
 A Claude Code plugin that summons agents based on the 16 personality types of MBTI® to debate, review, or advise on any topic.
 
-Use it for **idea generation, design decisions, life / career choices, code review, ethical dilemmas — anything where opinions are likely to diverge**. The premise: diversity of perspective leads to better conclusions.
+Use it for idea generation, design decisions, life / career choices, code review, ethical dilemmas — anything where opinions are likely to diverge. The premise: diversity of perspective leads to better conclusions.
 
 ## Why this exists
 
-Asking Claude for a review tends to produce balanced, averaged answers. What you usually want is several distinctly-biased perspectives clashing — so you can pick up the angles you'd otherwise have missed. 16-minds defines **values, thinking patterns, and tone** for each of the 16 types as independent prompts, then hits your topic with them in parallel.
+Asking Claude for a review tends to produce balanced, averaged answers. What you usually want is several distinctly-biased perspectives clashing — so you can pick up the angles you'd otherwise have missed. 16-minds defines values, thinking patterns, and tone for each of the 16 types as independent prompts, then hits your topic with them in parallel.
 
 ## Install
 
@@ -32,6 +32,40 @@ For local development:
 | `/pair <a> <b> [--mode=...] <topic>` | Two-type debate (open → rebut → reply / synthesize) |
 | `/minds [--mode=...] [--types=a,b,...] [--n=N] [--save] [--out=<path>] <topic>` | All 16 types in parallel + synthesis (heavy adds a rebuttal round). `--save` writes the full result to a file. |
 
+## Skills (action-oriented)
+
+Skills that use personalities to write, decide, vote, and ask — where `/mind` `/minds` `/pair` are for "discussion", these are for "execution."
+
+| Skill | What it does |
+|---|---|
+| `voice-write` | Write in a chosen type's voice, or rewrite AI-generated text |
+| `voice-decide` | Pick one option as a specified type (no fence-sitting) |
+| `voice-vote` | Have a group of types vote yes / no / abstain, judge whether it passes |
+| `voice-ask` | A specified type asks you sharp questions back (no answers, only questions) |
+
+The design rationale — three principles for stripping AI-ness, per-type output comparisons, real use cases for each Skill — is written up in a Qiita article (Japanese) → [記事から "AIっぽさ" をなくす Skills を作成した - Claude Code プラグイン『16-minds』](https://qiita.com/yukurash/items/4c4bfc492d91770618b8)
+
+### Command examples
+
+Explicit invocation:
+
+```
+/voice-write enfp Tips for getting a Qiita article actually read
+/voice-write intj --format=post Monday-morning self-pep-talk
+/voice-decide istj Next feature for a baby-tracking app: A) AI nutrition analysis B) realtime parent-pair log C) developmental milestone alerts
+/voice-vote Cut team standups from twice a week to once --types=entj,istj,entp,esfj,intp
+/voice-ask entp I want to monetize my personal-project plugin next year
+```
+
+Natural language also works:
+
+```
+Rewrite this as ENFP: <paste an AI-flavored draft here>
+Decide as ENTJ. A) Keep the monolith B) Carve it up gradually C) Full microservices
+Have the team vote: standardize all company laptops to MacBook Pro
+Push back as ENTP: a SaaS that auto-summarizes meetings via AI
+```
+
 ## Modes
 
 | Mode | Content | Use case |
@@ -40,12 +74,12 @@ For local development:
 | `middle` (default) | Light pass → expand divergent opinions → synthesis | Balanced first impression |
 | `heavy` | + rebuttal round + deeper synthesis | Heavy decisions or article material |
 
-The `/minds` **synthesis** section always follows this 4-part rubric (a fixed structure to prevent the discussion from going scattershot):
+The `/minds` synthesis section always follows this 4-part rubric (a fixed structure to prevent the discussion from going scattershot):
 
-1. **Score distribution** — min / mode / max in one line
-2. **Major axes of disagreement** (2–3) — each with representative types on either side
-3. **Easily-overlooked perspectives** (1–3) — sourced to the originating type
-4. **Landing-zone candidates** (2–3) — each with "types likely to agree / fit / risk"
+1. Score distribution — min / mode / max in one line
+2. Major axes of disagreement (2–3) — each with representative types on either side
+3. Easily-overlooked perspectives (1–3) — sourced to the originating type
+4. Landing-zone candidates (2–3) — each with "types likely to agree / fit / risk"
 
 ## Examples
 
@@ -109,10 +143,10 @@ Each type's personality is defined in `agents/<type>.md`. Cognitive functions (d
 
 ## Design notes
 
-- **Personalities are baked into prompts.** No centralized "value vector table" — avoids dual maintenance.
-- **Subagent calls are always parallel.** `/minds` fans out to 16 at most, so sequential dispatch would tank latency.
-- **Output format is dictated by the calling command.** Agents don't carry format specs — this avoids a 16 × 3 combinatorial explosion.
-- **Subagent output is shown verbatim.** No summarizing or paraphrasing (it would erase the personality).
+- Personalities are baked into prompts. No centralized "value vector table" — avoids dual maintenance.
+- Subagent calls are always parallel. `/minds` fans out to 16 at most, so sequential dispatch would tank latency.
+- Output format is dictated by the calling command. Agents don't carry format specs — this avoids a 16 × 3 combinatorial explosion.
+- Subagent output is shown verbatim. No summarizing or paraphrasing (it would erase the personality).
 
 ## License
 
