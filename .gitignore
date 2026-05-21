@@ -15,5 +15,9 @@ desktop.ini
 # /minds --save runtime output (timestamped files only — curated examples in Outputs/ are tracked)
 Outputs/[0-9]*-minds-*.md
 
+# Qiita article drafts and image prompts are local-only; only the title-discussion log is shared
+Outputs/qiita-*
+!Outputs/qiita-title-discussion.md
+
 # Claude Code local settings
 .claude/
