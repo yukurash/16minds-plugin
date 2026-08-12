@@ -2,6 +2,8 @@
 
 # 16-minds
 
+[![Skillselion Top 25](https://skillselion.com/badge/marketplace/yukurash/16minds-plugin.svg?award=1)](https://skillselion.com/marketplace/yukurash/16minds-plugin)
+
 MBTI® の16タイプの人格のエージェントを召喚して、どんなお題でも議論・レビュー・助言させる Claude Code プラグイン。
 
 アイデア出し・設計判断・ライフ／キャリア選択・コードレビュー・倫理的トピックなど、意見が割れそうなお題に使えます。視点の多様性が、より良い結論につながる、という前提でデザインされています。
