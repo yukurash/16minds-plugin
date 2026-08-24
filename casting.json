@@ -1,0 +1,676 @@
+{
+ "meta": {
+  "generated": "2026-08-24",
+  "source": "https://github.com/yukurash/16minds-lab",
+  "model": "claude-sonnet-5",
+  "fit_cells": 384,
+  "fit_repeats": 3,
+  "pairs": 120,
+  "topic": "portfolio_failures",
+  "rules_blob": "5014c474ef466519ea47361e6bfd2ef335b80d21",
+  "caveat": "順位は重複を禁じた強制順位の3反復平均。差の小さいタスクは spread を見ること。"
+ },
+ "tasks": [
+  "bug",
+  "spec_hole",
+  "design_review",
+  "naming",
+  "estimate",
+  "incident",
+  "refactor",
+  "tech_choice"
+ ],
+ "task_titles": {
+  "bug": "バグ調査",
+  "spec_hole": "仕様の穴探し",
+  "design_review": "設計レビュー",
+  "naming": "命名",
+  "estimate": "見積もり",
+  "incident": "障害対応",
+  "refactor": "リファクタ判断",
+  "tech_choice": "技術選定"
+ },
+ "rank_spread": {
+  "bug": 3.29,
+  "spec_hole": 3.65,
+  "design_review": 3.2,
+  "naming": 2.83,
+  "estimate": 3.15,
+  "incident": 2.74,
+  "refactor": 3.49,
+  "tech_choice": 2.88
+ },
+ "fitness": {
+  "intj": {
+   "bug": 0.756,
+   "spec_hole": 0.6,
+   "design_review": 0.489,
+   "naming": 0.756,
+   "estimate": 0.622,
+   "incident": 0.8,
+   "refactor": 0.733,
+   "tech_choice": 0.8
+  },
+  "intp": {
+   "bug": 0.422,
+   "spec_hole": 0.378,
+   "design_review": 0.556,
+   "naming": 0.933,
+   "estimate": 0.578,
+   "incident": 0.2,
+   "refactor": 0.289,
+   "tech_choice": 0.756
+  },
+  "entj": {
+   "bug": 0.311,
+   "spec_hole": 0.556,
+   "design_review": 0.756,
+   "naming": 0.756,
+   "estimate": 0.778,
+   "incident": 0.778,
+   "refactor": 0.667,
+   "tech_choice": 0.6
+  },
+  "entp": {
+   "bug": 0.489,
+   "spec_hole": 0.578,
+   "design_review": 0.8,
+   "naming": 0.489,
+   "estimate": 0.6,
+   "incident": 0.822,
+   "refactor": 0.511,
+   "tech_choice": 0.711
+  },
+  "infj": {
+   "bug": 0.822,
+   "spec_hole": 0.467,
+   "design_review": 0.844,
+   "naming": 0.667,
+   "estimate": 0.711,
+   "incident": 0.644,
+   "refactor": 0.556,
+   "tech_choice": 0.511
+  },
+  "infp": {
+   "bug": 0.533,
+   "spec_hole": 0.289,
+   "design_review": 0.4,
+   "naming": 0.378,
+   "estimate": 0.378,
+   "incident": 0.267,
+   "refactor": 0.311,
+   "tech_choice": 0.267
+  },
+  "enfj": {
+   "bug": 0.667,
+   "spec_hole": 0.289,
+   "design_review": 0.311,
+   "naming": 0.467,
+   "estimate": 0.489,
+   "incident": 0.711,
+   "refactor": 0.578,
+   "tech_choice": 0.711
+  },
+  "enfp": {
+   "bug": 0.556,
+   "spec_hole": 0.467,
+   "design_review": 0.467,
+   "naming": 0.156,
+   "estimate": 0.756,
+   "incident": 0.578,
+   "refactor": 0.822,
+   "tech_choice": 0.644
+  },
+  "istj": {
+   "bug": 0.467,
+   "spec_hole": 0.756,
+   "design_review": 0.267,
+   "naming": 0.689,
+   "estimate": 0.333,
+   "incident": 0.467,
+   "refactor": 0.578,
+   "tech_choice": 0.4
+  },
+  "isfj": {
+   "bug": 0.111,
+   "spec_hole": 0.533,
+   "design_review": 0.333,
+   "naming": 0.178,
+   "estimate": 0.311,
+   "incident": 0.133,
+   "refactor": 0.444,
+   "tech_choice": 0.667
+  },
+  "estj": {
+   "bug": 0.644,
+   "spec_hole": 0.756,
+   "design_review": 0.511,
+   "naming": 0.2,
+   "estimate": 0.533,
+   "incident": 0.667,
+   "refactor": 0.222,
+   "tech_choice": 0.467
+  },
+  "esfj": {
+   "bug": 0.222,
+   "spec_hole": 0.333,
+   "design_review": 0.133,
+   "naming": 0.4,
+   "estimate": 0.289,
+   "incident": 0.4,
+   "refactor": 0.311,
+   "tech_choice": 0.422
+  },
+  "istp": {
+   "bug": 0.711,
+   "spec_hole": 0.511,
+   "design_review": 0.756,
+   "naming": 0.644,
+   "estimate": 0.778,
+   "incident": 0.422,
+   "refactor": 0.622,
+   "tech_choice": 0.533
+  },
+  "isfp": {
+   "bug": 0.4,
+   "spec_hole": 0.733,
+   "design_review": 0.267,
+   "naming": 0.289,
+   "estimate": 0.133,
+   "incident": 0.156,
+   "refactor": 0.244,
+   "tech_choice": 0.022
+  },
+  "estp": {
+   "bug": 0.533,
+   "spec_hole": 0.467,
+   "design_review": 0.622,
+   "naming": 0.622,
+   "estimate": 0.133,
+   "incident": 0.4,
+   "refactor": 0.667,
+   "tech_choice": 0.178
+  },
+  "esfp": {
+   "bug": 0.356,
+   "spec_hole": 0.289,
+   "design_review": 0.489,
+   "naming": 0.378,
+   "estimate": 0.578,
+   "incident": 0.556,
+   "refactor": 0.444,
+   "tech_choice": 0.311
+  }
+ },
+ "detection": {
+  "intj": {
+   "bug": 0.833,
+   "spec_hole": 0.333,
+   "incident": 1.0
+  },
+  "intp": {
+   "bug": 0.75,
+   "spec_hole": 0.286,
+   "incident": 1.0
+  },
+  "entj": {
+   "bug": 0.75,
+   "spec_hole": 0.333,
+   "incident": 1.0
+  },
+  "entp": {
+   "bug": 0.75,
+   "spec_hole": 0.286,
+   "incident": 1.0
+  },
+  "infj": {
+   "bug": 0.833,
+   "spec_hole": 0.286,
+   "incident": 1.0
+  },
+  "infp": {
+   "bug": 0.75,
+   "spec_hole": 0.286,
+   "incident": 1.0
+  },
+  "enfj": {
+   "bug": 0.75,
+   "spec_hole": 0.238,
+   "incident": 1.0
+  },
+  "enfp": {
+   "bug": 0.667,
+   "spec_hole": 0.238,
+   "incident": 1.0
+  },
+  "istj": {
+   "bug": 0.75,
+   "spec_hole": 0.333,
+   "incident": 1.0
+  },
+  "isfj": {
+   "bug": 0.667,
+   "spec_hole": 0.333,
+   "incident": 1.0
+  },
+  "estj": {
+   "bug": 0.833,
+   "spec_hole": 0.238,
+   "incident": 1.0
+  },
+  "esfj": {
+   "bug": 0.667,
+   "spec_hole": 0.238,
+   "incident": 1.0
+  },
+  "istp": {
+   "bug": 0.833,
+   "spec_hole": 0.238,
+   "incident": 1.0
+  },
+  "isfp": {
+   "bug": 0.833,
+   "spec_hole": 0.381,
+   "incident": 1.0
+  },
+  "estp": {
+   "bug": 0.75,
+   "spec_hole": 0.19,
+   "incident": 1.0
+  },
+  "esfp": {
+   "bug": 0.75,
+   "spec_hole": 0.286,
+   "incident": 0.833
+  }
+ },
+ "best_for_task": {
+  "bug": [
+   "infj",
+   "intj",
+   "istp",
+   "enfj",
+   "estj"
+  ],
+  "spec_hole": [
+   "istj",
+   "estj",
+   "isfp",
+   "intj",
+   "entp"
+  ],
+  "design_review": [
+   "infj",
+   "entp",
+   "entj",
+   "istp",
+   "estp"
+  ],
+  "naming": [
+   "intp",
+   "intj",
+   "entj",
+   "istj",
+   "infj"
+  ],
+  "estimate": [
+   "entj",
+   "istp",
+   "enfp",
+   "infj",
+   "intj"
+  ],
+  "incident": [
+   "entp",
+   "intj",
+   "entj",
+   "enfj",
+   "estj"
+  ],
+  "refactor": [
+   "enfp",
+   "intj",
+   "entj",
+   "estp",
+   "istp"
+  ],
+  "tech_choice": [
+   "intj",
+   "intp",
+   "entp",
+   "enfj",
+   "isfj"
+  ]
+ },
+ "chemistry": {
+  "intj": {
+   "entj": 6.0,
+   "entp": 5.5,
+   "intp": 6.0,
+   "infj": 7.0,
+   "istj": 5.5,
+   "infp": 4.5,
+   "enfp": 7.5,
+   "enfj": 5.5,
+   "isfj": 5.5,
+   "esfj": 4.5,
+   "estj": 6.5,
+   "istp": 5.5,
+   "esfp": 5.5,
+   "isfp": 4.5,
+   "estp": 7.5
+  },
+  "intp": {
+   "intj": 6.0,
+   "entp": 6.0,
+   "entj": 6.5,
+   "infj": 5.5,
+   "infp": 5.5,
+   "enfp": 6.0,
+   "enfj": 4.5,
+   "istj": 6.0,
+   "isfj": 7.0,
+   "esfj": 6.0,
+   "estj": 6.5,
+   "estp": 4.5,
+   "istp": 5.5,
+   "esfp": 7.0,
+   "isfp": 5.5
+  },
+  "entj": {
+   "intj": 6.0,
+   "intp": 6.5,
+   "infj": 5.0,
+   "entp": 8.5,
+   "infp": 4.5,
+   "enfj": 4.5,
+   "isfj": 4.0,
+   "istj": 4.0,
+   "enfp": 7.0,
+   "esfj": 5.0,
+   "estj": 4.5,
+   "istp": 5.0,
+   "estp": 5.5,
+   "isfp": 3.0,
+   "esfp": 4.5
+  },
+  "entp": {
+   "intj": 5.5,
+   "intp": 6.0,
+   "entj": 8.5,
+   "infp": 6.0,
+   "infj": 7.0,
+   "enfj": 6.0,
+   "istj": 6.0,
+   "estj": 7.0,
+   "isfj": 7.0,
+   "enfp": 7.0,
+   "esfj": 6.5,
+   "isfp": 4.5,
+   "istp": 5.5,
+   "estp": 4.5,
+   "esfp": 7.0
+  },
+  "infj": {
+   "intj": 7.0,
+   "intp": 5.5,
+   "entj": 5.0,
+   "entp": 7.0,
+   "infp": 3.0,
+   "enfj": 5.5,
+   "istj": 6.5,
+   "isfj": 5.0,
+   "enfp": 4.5,
+   "estj": 6.5,
+   "istp": 6.0,
+   "esfj": 7.0,
+   "isfp": 4.5,
+   "esfp": 5.5,
+   "estp": 5.5
+  },
+  "infp": {
+   "intj": 4.5,
+   "intp": 5.5,
+   "entj": 4.5,
+   "entp": 6.0,
+   "infj": 3.0,
+   "enfj": 4.0,
+   "enfp": 5.5,
+   "istj": 5.5,
+   "isfj": 4.5,
+   "estj": 5.5,
+   "istp": 5.0,
+   "esfj": 5.5,
+   "isfp": 4.5,
+   "esfp": 4.5,
+   "estp": 7.0
+  },
+  "enfj": {
+   "intj": 5.5,
+   "intp": 4.5,
+   "entj": 4.5,
+   "entp": 6.0,
+   "infj": 5.5,
+   "infp": 4.0,
+   "enfp": 4.5,
+   "istj": 5.5,
+   "isfj": 5.5,
+   "estj": 4.5,
+   "esfj": 4.5,
+   "isfp": 4.5,
+   "estp": 6.5,
+   "esfp": 5.5,
+   "istp": 5.5
+  },
+  "enfp": {
+   "intj": 7.5,
+   "intp": 6.0,
+   "entj": 7.0,
+   "entp": 7.0,
+   "infj": 4.5,
+   "infp": 5.5,
+   "enfj": 4.5,
+   "isfj": 6.0,
+   "istj": 7.5,
+   "estj": 6.0,
+   "istp": 6.5,
+   "esfp": 4.5,
+   "isfp": 3.0,
+   "estp": 4.5,
+   "esfj": 5.5
+  },
+  "istj": {
+   "intj": 5.5,
+   "intp": 6.0,
+   "entj": 4.0,
+   "entp": 6.0,
+   "infj": 6.5,
+   "infp": 5.5,
+   "enfj": 5.5,
+   "enfp": 7.5,
+   "isfj": 4.5,
+   "estj": 5.5,
+   "isfp": 3.5,
+   "esfp": 9.5,
+   "istp": 5.5,
+   "estp": 4.5,
+   "esfj": 5.0
+  },
+  "isfj": {
+   "intj": 5.5,
+   "intp": 7.0,
+   "entj": 4.0,
+   "entp": 7.0,
+   "infj": 5.0,
+   "infp": 4.5,
+   "enfj": 5.5,
+   "enfp": 6.0,
+   "istj": 4.5,
+   "estj": 5.0,
+   "istp": 4.5,
+   "esfj": 4.0,
+   "estp": 4.5,
+   "isfp": 4.5,
+   "esfp": 5.5
+  },
+  "estj": {
+   "intj": 6.5,
+   "intp": 6.5,
+   "entj": 4.5,
+   "entp": 7.0,
+   "infj": 6.5,
+   "infp": 5.5,
+   "enfj": 4.5,
+   "enfp": 6.0,
+   "istj": 5.5,
+   "isfj": 5.0,
+   "istp": 5.5,
+   "esfj": 4.5,
+   "esfp": 5.5,
+   "estp": 5.5,
+   "isfp": 5.5
+  },
+  "esfj": {
+   "intj": 4.5,
+   "intp": 6.0,
+   "entj": 5.0,
+   "entp": 6.5,
+   "infj": 7.0,
+   "infp": 5.5,
+   "enfj": 4.5,
+   "isfj": 4.0,
+   "istj": 5.0,
+   "estj": 4.5,
+   "istp": 4.5,
+   "estp": 3.0,
+   "esfp": 5.5,
+   "isfp": 4.0,
+   "enfp": 5.5
+  },
+  "istp": {
+   "intj": 5.5,
+   "intp": 5.5,
+   "entj": 5.0,
+   "entp": 5.5,
+   "infj": 6.0,
+   "infp": 5.0,
+   "enfp": 6.5,
+   "istj": 5.5,
+   "isfj": 4.5,
+   "estj": 5.5,
+   "esfj": 4.5,
+   "enfj": 5.5,
+   "isfp": 5.5,
+   "esfp": 5.5,
+   "estp": 1.5
+  },
+  "isfp": {
+   "intj": 4.5,
+   "intp": 5.5,
+   "entj": 3.0,
+   "entp": 4.5,
+   "infj": 4.5,
+   "infp": 4.5,
+   "enfj": 4.5,
+   "enfp": 3.0,
+   "istj": 3.5,
+   "isfj": 4.5,
+   "istp": 5.5,
+   "estp": 4.5,
+   "esfp": 4.5,
+   "esfj": 4.0,
+   "estj": 5.5
+  },
+  "estp": {
+   "intj": 7.5,
+   "intp": 4.5,
+   "entj": 5.5,
+   "entp": 4.5,
+   "infj": 5.5,
+   "infp": 7.0,
+   "enfj": 6.5,
+   "enfp": 4.5,
+   "istj": 4.5,
+   "isfj": 4.5,
+   "estj": 5.5,
+   "esfj": 3.0,
+   "istp": 1.5,
+   "isfp": 4.5,
+   "esfp": 5.5
+  },
+  "esfp": {
+   "intj": 5.5,
+   "intp": 7.0,
+   "entj": 4.5,
+   "entp": 7.0,
+   "infj": 5.5,
+   "infp": 4.5,
+   "enfj": 5.5,
+   "enfp": 4.5,
+   "istj": 9.5,
+   "isfj": 5.5,
+   "estj": 5.5,
+   "esfj": 5.5,
+   "istp": 5.5,
+   "estp": 5.5,
+   "isfp": 4.5
+  }
+ },
+ "chemistry_note": "新規論点数 + 組ませた価値/2。各ペア1回のみの測定で、分散の62.9%はペア固有の相互作用と測定ノイズの区別がつかない残差。個別のセルを根拠に使わないこと。",
+ "partner_effect": {
+  "intj": 0.421,
+  "intp": 0.487,
+  "entj": -0.212,
+  "entp": 0.888,
+  "infj": 0.221,
+  "infp": -0.379,
+  "enfj": -0.279,
+  "enfp": 0.321,
+  "istj": 0.254,
+  "isfj": -0.246,
+  "estj": 0.221,
+  "esfj": -0.379,
+  "istp": -0.246,
+  "isfp": -0.979,
+  "estp": -0.412,
+  "esfp": 0.321
+ },
+ "distance_beta": 0.287,
+ "best_rival": {
+  "intj": "esfp",
+  "intp": "esfp",
+  "entj": "esfp",
+  "entp": "istj",
+  "infj": "entp",
+  "infp": "entp",
+  "enfj": "entp",
+  "enfp": "istj",
+  "istj": "entp",
+  "isfj": "entp",
+  "estj": "entp",
+  "esfj": "entp",
+  "istp": "entp",
+  "isfp": "entp",
+  "estp": "infj",
+  "esfp": "intj"
+ },
+ "worst_rival": {
+  "intj": "isfp",
+  "intp": "isfp",
+  "entj": "enfj",
+  "entp": "estp",
+  "infj": "isfp",
+  "infp": "isfp",
+  "enfj": "isfp",
+  "enfp": "isfp",
+  "istj": "isfp",
+  "isfj": "isfp",
+  "estj": "estp",
+  "esfj": "isfp",
+  "istp": "isfp",
+  "isfp": "infp",
+  "estp": "isfp",
+  "esfp": "isfp"
+ },
+ "rival_note": "生の測定値ではなく、確認できた2つの効果（相手自身の議論生産性 partner_effect と、タイプ間の距離 distance_beta）だけから決めている。"
+}

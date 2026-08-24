@@ -1,5 +1,5 @@
 ---
-description: Pair two personality types in a debate on a topic. Usage: /pair <a> <b> [--mode=light|middle|heavy] <topic>
+description: Pair two personality types in a debate on a topic. Usage: /pair <a> [b|--rival] [--mode=light|middle|heavy] <topic>
 ---
 
 ユーザーが `/pair` を実行しました。
@@ -9,8 +9,27 @@ description: Pair two personality types in a debate on a topic. Usage: /pair <a>
 ## 引数の解釈
 
 1. `--mode=light|middle|heavy`（または `--mode light` 形式）があれば取り出してモードとする。指定が無ければ `middle`。
-2. 残った引数の先頭2語をタイプ名 a, b として取り出し、小文字に正規化する。
-3. 残りをお題として扱う。
+2. `--rival` があれば取り出す。この場合、タイプ名は先頭1語（a）だけを読む。
+3. `--rival` が無ければ、残った引数の先頭2語をタイプ名 a, b として取り出し、小文字に正規化する。
+4. 残りをお題として扱う。
+
+### `--rival` — 論敵を実測値で選ぶ
+
+`--rival` が指定された場合、b は指定させず、プラグイン直下の `casting.json` から
+`best_rival[a]` を読んで b とする。
+
+**個別ペアの測定値は使っていない。** 120ペアを総当たりで測ったが、ペア固有の値は
+分散の 62.9% が測定ノイズと区別できず、そのまま根拠にできなかった。再現した効果は
+「相手自身の議論生産性」と「タイプ間の距離」の 2 つだけで、b はそこから決めている。
+
+冒頭に 1 行だけ添える。実測値を騙らないこと。
+
+```
+論敵: <a> ←→ <b>（距離<相違文字数>文字 / 相手の議論生産性 <partner_effect>）
+```
+
+`casting.json` が無い、あるいは `best_rival[a]` が引けない場合は、その旨を伝えて
+b を指定するよう促して終了する。実測値があるかのように書いてはいけない。
 
 利用可能なタイプ:
 `intj, intp, entj, entp, infj, infp, enfj, enfp, istj, isfj, estj, esfj, istp, isfp, estp, esfp`
@@ -20,10 +39,13 @@ description: Pair two personality types in a debate on a topic. Usage: /pair <a>
 - お題が空、a/b が揃わない場合:
   ```
   Usage: /pair <a> <b> [--mode=light|middle|heavy] <topic>
+     or: /pair <a> --rival [--mode=light|middle|heavy] <topic>
   Example: /pair intj enfp リモートワークと出社のバランス
   Example: /pair istj entp --mode=heavy コードベースの大規模リファクタ
+  Example: /pair intj --rival このAPI設計、このまま出していいか
   ```
 - a, b が同じタイプの場合: 「異なる2タイプを指定してください」と返して終了。
+- `--rival` と b の両方が指定されている場合: b を優先し、`--rival` は無視した旨を一行添える。
 - 未知タイプ、未知モードの場合: 利用可能リストと共に返して終了。
 
 ## 実行フロー
