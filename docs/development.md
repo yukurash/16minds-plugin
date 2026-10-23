@@ -36,8 +36,10 @@ GitHub Actionsは構造検査だけを実施します。秘密のモデル認証
 
 ## 確認状況
 
-- Claude Code 2.1.221: manifest検査と指名執筆のスモークを実施。
-- GitHub Copilot CLI 1.0.94-3: Agent Plugins 1.0のlocal mount、Skill読込、自動配役、登録writerへのtask委譲を確認。
+- Claude Code 2.1.221: 両manifestの検査、Skillと参照仕様の読込、自動配役・指名執筆、登録診断で全16人格へのネイティブAgent呼び出しと正常完了を確認。
+- GitHub Copilot CLI 1.0.94-3: Agent Plugins 1.0のlocal mount、Skill読込、自動配役、登録診断で全16writerへのネイティブtask委譲を確認。
+- 両CLIで代表8ケースを確認: 指名とautoの併記、人格未指定、不正format、モード競合、length=0、リライト、article指定、format未指定時のarticle既定値。不正入力や人格未指定ではwriterを起動しないことと、返答内容を確認。
+- 全16登録の診断は個別指名による呼び出し確認であり、全人格が自動配役されることや全場面の作文品質を保証しません。モデル依存の処理なので、これらの結果も将来の全実行での一致を保証するものではありません。
 - VS Code Copilot: package構造は公式のAgent Plugins 1.0形式に準拠。現時点でUIの導入・選択操作は未確認。CLIの結果をUIの検証済みとは扱いません。
 
 ここに記事用の比較入力、生ログ、原稿を置かないでください。通常の製品テストだけを管理します。
