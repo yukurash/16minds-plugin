@@ -1,5 +1,5 @@
 ---
-description: Pick the types measured as strongest for this kind of work and convene only them. Usage: /cast [--n=N] [--mode=light|middle|heavy] [--show] <topic>
+description: "Pick the types measured as strongest for this kind of work and convene only them. Usage: /cast [--n=N] [--mode=light|middle|heavy] [--show] <topic>"
 ---
 
 ユーザーが `/cast` を実行しました。

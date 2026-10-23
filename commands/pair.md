@@ -1,5 +1,5 @@
 ---
-description: Pair two personality types in a debate on a topic. Usage: /pair <a> [b|--rival] [--mode=light|middle|heavy] <topic>
+description: "Pair two personality types in a debate on a topic. Usage: /pair <a> [b|--rival] [--mode=light|middle|heavy] <topic>"
 ---
 
 ユーザーが `/pair` を実行しました。

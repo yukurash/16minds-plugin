@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "16-minds-writing",
+  "version": "0.4.0",
+  "description": "Situation-aware writing with 16 personality agents for GitHub Copilot.",
+  "author": {
+    "name": "yukurash"
+  },
+  "repository": "https://github.com/yukurash/16minds-plugin",
+  "license": "MIT"
+}
