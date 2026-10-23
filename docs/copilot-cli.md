@@ -15,6 +15,8 @@ copilot plugin list
 
 Copilot用package名は`16-minds-writing`です。Claude用のrepoルートではなく、上の`copilot`サブディレクトリを指定してください。
 
+Copilot CLI 1.0.94-3で、このGitHubからの直接導入とv0.4.0のSkill・writer実行を確認しています。ただし、CLIはrepo・URL・local pathからの直接導入を非推奨とし、将来は`plugin@marketplace`形式だけをサポートする予定だと警告します。この手順は現在の検証版向けです。将来のCLIでは導入経路の移行が必要になる可能性があります。Claude用marketplaceの登録を、Copilot文章packageのmarketplace対応とは扱わないでください。
+
 ```powershell
 copilot plugin update 16-minds-writing
 copilot plugin uninstall 16-minds-writing
