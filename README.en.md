@@ -2,163 +2,130 @@
 
 # 16-minds
 
-A plugin that summons agents based on the 16 personality types of MBTI® to debate, review, advise, or write. Claude Code supports the existing full plugin; GitHub Copilot supports situation-aware writing.
+A plugin for discussion, review, decisions, and writing with agents inspired by the 16 personality types of MBTI®. Approach the same topic with different values, priorities, and voices.
 
-Use it for idea generation, design decisions, life / career choices, code review, ethical dilemmas — anything where opinions are likely to diverge. The premise: diversity of perspective leads to better conclusions.
+## What can I do?
 
-## Why this exists
+| I want to... | Command or skill |
+|---|---|
+| Get one perspective on a review or idea | [`/mind`](#mind) |
+| Have two perspectives challenge each other | [`/pair`](#pair) |
+| Compare several opinions and find a way forward | [`/minds`](#minds) |
+| Let the plugin choose participants for a topic | [`/cast`](#cast) |
+| Write or rewrite for a situation or persona | [`voice-write`](#voice-write) |
+| Pick one of several options | [`voice-decide`](#voice-decide) |
+| See votes and reasons for a proposal | [`voice-vote`](#voice-vote) |
+| Get probing questions instead of answers | [`voice-ask`](#voice-ask) |
 
-Asking Claude for a review tends to produce balanced, averaged answers. What you usually want is several distinctly-biased perspectives clashing — so you can pick up the angles you'd otherwise have missed. 16-minds defines values, thinking patterns, and tone for each of the 16 types as independent prompts, then hits your topic with them in parallel.
+## Install
 
-## Choose your client
-
-| Client | Scope | Setup and usage |
+| Client | Supported features | Setup and usage |
 |---|---|---|
-| Claude Code | Existing commands and skills, plus automatic writer casting | [Claude Code](docs/claude-code.md) |
-| GitHub Copilot CLI | `voice-write` and 16 writer agents | [Copilot CLI](docs/copilot-cli.md) |
-| VS Code GitHub Copilot | The Copilot writing package | [VS Code Copilot](docs/vscode-copilot.md) |
+| Claude Code | All commands and skills | [Claude Code guide](docs/claude-code.md) |
+| GitHub Copilot CLI | `voice-write` and 16 writer agents | [Copilot CLI guide](docs/copilot-cli.md) |
+| VS Code GitHub Copilot | Same writing package (UI unverified) | [VS Code guide](docs/vscode-copilot.md) |
 
-The guides are in Japanese and include executable command examples. Client-specific agent metadata and invocation are separate; this is not a port of every Claude debate command. Your client's model access and usage limits still apply.
+In the **Claude Code** interactive session:
 
-## Install (Claude Code)
-
-```
+```text
 /plugin marketplace add yukurash/16minds-plugin
-/plugin install 16-minds
+/plugin install 16-minds@16-minds-marketplace
 ```
 
-For local development:
+For **GitHub Copilot CLI**, run in a terminal:
 
+```powershell
+copilot plugin install yukurash/16minds-plugin:copilot
 ```
-/plugin marketplace add <path to your local clone>
-/plugin install 16-minds
+
+Copilot supports writing only. The guides are in Japanese with executable examples; see them for installation caveats, updates, removal, and local development. No additional external API key is required, but your client's subscription, model settings, and usage limits still apply.
+
+## Discussion and review commands
+
+These examples use Claude Code's plugin-qualified names. All four commands accept `--mode=light|middle|heavy`, defaulting to `middle`. Use `light` for a quick pass or `heavy` for a deeper discussion.
+
+### /mind
+
+Ask one personality for an opinion, review, or advice. [Arguments and details](commands/mind.md)
+
+```text
+/16-minds:mind intj Will this API design hold up long-term?
 ```
 
-## Commands
+### /pair
 
-| Command | What it does |
-|---|---|
-| `/mind <type> [--mode=...] <topic>` | A single type's opinion |
-| `/pair <a> <b> [--mode=...] <topic>` | Two-type debate (open → rebut → reply / synthesize) |
-| `/minds [--mode=...] [--types=a,b,...] [--n=N] [--save] [--out=<path>] <topic>` | All 16 types in parallel + synthesis (heavy adds a rebuttal round). `--save` writes the full result to a file. |
+Have two personalities present and challenge their positions. `heavy` adds replies and a conclusion; `--rival` chooses the opponent automatically. [Arguments and details](commands/pair.md)
 
-## Skills (action-oriented)
+```text
+/16-minds:pair istj entp --mode=heavy Split the monolith or keep it
+/16-minds:pair intj --rival Is this API design ready to ship?
+```
 
-Skills that use personalities to write, decide, vote, and ask — where `/mind` `/minds` `/pair` are for "discussion", these are for "execution."
+### /minds
 
-| Skill | What it does |
-|---|---|
-| `voice-write` | Write/rewrite as a chosen type, or use `--auto` to cast a writer for the situation |
-| `voice-decide` | Pick one option as a specified type (no fence-sitting) |
-| `voice-vote` | Have a group of types vote yes / no / abstain, judge whether it passes |
-| `voice-ask` | A specified type asks you sharp questions back (no answers, only questions) |
+Compare opinions, identify disagreements, and synthesize possible ways forward. All 16 personalities participate by default. [Arguments and details](commands/minds.md)
 
-The design rationale — three principles for stripping AI-ness, per-type output comparisons, real use cases for each Skill — is written up in a Qiita article (Japanese) → [記事から "AIっぽさ" をなくす Skills を作成した - Claude Code プラグイン『16-minds』](https://qiita.com/yukurash/items/4c4bfc492d91770618b8)
+```text
+/16-minds:minds Narrow down naming candidates for a new service
+/16-minds:minds --mode=heavy --types=intj,entj,istp --save Which DB should we adopt next?
+```
 
-In v0.4, `voice-write` no longer unconditionally bans neutrality, definitions, headings, or leading with the conclusion. Audience, purpose, and factual fidelity take priority. Existing persona arguments, write/rewrite, formats, and length hints remain supported; the writing style intentionally changes.
+- Use `--types=a,b,...` to pick participants. Without it, `--n=N` takes the first N types in the list.
+- `--save` writes the result to `Outputs/<timestamp>-minds-<mode>.md`. Use `--out=<path>` to choose the destination.
 
-### Automatic writer casting
+### /cast
+
+Let the plugin select a smaller group for the topic, then collect their opinions and synthesis. [Arguments and details](commands/cast.md)
+
+```text
+/16-minds:cast --n=4 --show Should we keep developing with this architecture?
+```
+
+Use `--n` to set the group size and `--show` to display the selection rationale. To choose a writer instead, use `voice-write --auto` below.
+
+## Skills: write, decide, vote, and ask
+
+These examples also use Claude Code. Skills can be requested in natural language, such as "rewrite as ENFP", "decide as ENTJ", "vote with all 16 minds", or "question this as ENTP".
+
+### voice-write
+
+Write or rewrite with one personality. Name the type, or use `--auto` to choose a writer for the purpose, audience, and medium. An explicit type takes precedence over `--auto`.
 
 ```text
 /16-minds:voice-write --auto --format=reply --show Turn these facts into a team update: <facts>
-/16-minds:voice-write --auto --rewrite --format=post <audience, purpose and draft>
-/16-minds:voice-write infj --rewrite --length=200字 <draft>
+/16-minds:voice-write infj --rewrite --format=post --length=200字 <draft>
 ```
 
-These are Claude Code plugin-qualified commands. See the client guides for Copilot invocation.
-`--auto` is opt-in; an explicit persona wins. `--show` separates selection metadata from copyable prose. Missing intent is clarified, unavailable agents fail explicitly, and unsupported facts or commitments must not be invented. Persona fit is a hypothesis, not a measured psychological capability.
+- `--write` / `--rewrite`: create new prose or revise a draft. New writing is the default.
+- `--format=article|essay|post|reply`: output format, defaulting to `article`.
+- `--length=200字`: an approximate character target, not a strict limit.
+- `--show`: display the chosen type and selection rationale separately. Normally, only finished prose is returned.
 
-See [development instructions](docs/development.md) for generation and structural tests.
+The situation and factual fidelity take priority over persona. For Copilot invocation, see the [CLI guide](docs/copilot-cli.md) or [VS Code guide](docs/vscode-copilot.md). The [writing specification](skills/voice-write/references/writing.md) covers shared arguments and policy.
 
-### Command examples
+### voice-decide
 
-Explicit invocation:
+Choose one of at least two options using a specified personality's values. [Arguments and details](skills/voice-decide/SKILL.md)
 
-```
-/voice-write enfp Tips for getting a Qiita article actually read
-/voice-write intj --format=post Monday-morning self-pep-talk
-/voice-decide istj Next feature for a baby-tracking app: A) AI nutrition analysis B) realtime parent-pair log C) developmental milestone alerts
-/voice-vote Cut team standups from twice a week to once --types=entj,istj,entp,esfj,intp
-/voice-ask entp I want to monetize my personal-project plugin next year
+```text
+/16-minds:voice-decide entj A) Keep the monolith B) Split gradually C) Full microservices
 ```
 
-Natural language also works:
+### voice-vote
 
-```
-Rewrite this as ENFP: <paste an AI-flavored draft here>
-Decide as ENTJ. A) Keep the monolith B) Carve it up gradually C) Full microservices
-Have the team vote: standardize all company laptops to MacBook Pro
-Push back as ENTP: a SaaS that auto-summarizes meetings via AI
-```
+Collect yes, no, and abstain votes, a pass/fail judgment, and the main reasons. All 16 types vote by default; `--types` narrows the group. [Arguments and details](skills/voice-vote/SKILL.md)
 
-## Modes
-
-| Mode | Content | Use case |
-|---|---|---|
-| `light` | Score + one-line comment only | Quick diversity check, token savings |
-| `middle` (default) | Light pass → expand divergent opinions → synthesis | Balanced first impression |
-| `heavy` | + rebuttal round + deeper synthesis | Heavy decisions or article material |
-
-The `/minds` synthesis section always follows this 4-part rubric (a fixed structure to prevent the discussion from going scattershot):
-
-1. Score distribution — min / mode / max in one line
-2. Major axes of disagreement (2–3) — each with representative types on either side
-3. Easily-overlooked perspectives (1–3) — sourced to the originating type
-4. Landing-zone candidates (2–3) — each with "types likely to agree / fit / risk"
-
-## Examples
-
-### Idea generation (the original motivation for this plugin)
-
-```
-/minds Which Qiita article title would land hardest?
-/minds --mode=heavy Narrow down naming candidates for a new service
-/mind enfp Give me 3 ideas for refreshing this weekend
-/pair entp infj What side project should I start
+```text
+/16-minds:voice-vote --types=entj,istj,entp,esfj --save Cut team standups from twice a week to once
 ```
 
-Real example: [`Outputs/qiita-title-discussion.md`](Outputs/qiita-title-discussion.md) — a full log of using `/minds` on this very repo to debate a Qiita article title (Phase 1 table → Phase 2 deep-dive → Phase 3 synthesis landing on 3 candidates).
+### voice-ask
 
-### Design decisions / code review
+Get questions from a specified personality to examine your idea or plan, rather than answers or advice. [Arguments and details](skills/voice-ask/SKILL.md)
 
+```text
+/16-minds:voice-ask entp I want to build a SaaS that auto-summarizes meetings with AI
 ```
-/mind intj Will this API design hold up long-term?
-/pair istj entp --mode=heavy Split the monolith or keep it
-/minds --mode=heavy --types=intj,entj,istp Which DB to adopt next
-/minds The pros and cons of AI-driven code review
-```
-
-### Life and career choices
-
-```
-/minds Change jobs or wait for promotion at the current company
-/pair infj entj --mode=heavy Turn the side project into the main gig
-/mind enfp --mode=heavy Balance between remote work and office
-```
-
-### Sample output (`/mind intj` in light mode)
-
-```
-score: 2
-stance: Sacrificing long-term optimization for short-term comfort
-key_axis: Long-term optimization
-concern: Continue this for 3 years and exit cost grows exponentially
-```
-
-### Sample output (`/minds --mode=light` first-pass table)
-
-```
-| type | score | stance | key_axis | concern |
-|---|---|---|---|---|
-| intj | 2 | Inefficient in the long run | Long-term optimization | Growing exit cost |
-| enfp | 5 | A choice that makes today's self happy is fine | Freedom | Watch for burnout |
-| istj | 3 | OK if there's precedent, otherwise cautious | Evidence | Thin validation data |
-...
-```
-
-## Saving results
-
-`/minds --save` writes the full execution (Phase 1 table, deep-dive, synthesis) to `Outputs/<timestamp>-minds-<mode>.md`. Use `--out=<path>` to specify the destination explicitly. Handy when you want to keep the discussion as article material or a decision log.
 
 ## Available types
 
@@ -166,12 +133,14 @@ concern: Continue this for 3 years and exit cost grows exponentially
 
 Each type's personality is defined in `agents/<type>.md`. Cognitive functions (dominant + auxiliary), core values, strengths and weaknesses, debate quirks, and characteristic phrasings are all spelled out — so the output has visible individuality.
 
-## Design notes
+Personas are prompts for changing perspective, priorities, and writing style, not psychological assessments or guarantees of ability. Review important decisions and external communications yourself.
 
-- Personalities are baked into prompts. No centralized "value vector table" — avoids dual maintenance.
-- Subagent calls are always parallel. `/minds` fans out to 16 at most, so sequential dispatch would tank latency.
-- Output format is dictated by the calling command. Agents don't carry format specs — this avoids a 16 × 3 combinatorial explosion.
-- Subagent output is shown verbatim. No summarizing or paraphrasing (it would erase the personality).
+## Further reading
+
+- [Example discussion output](Outputs/qiita-title-discussion.md)
+- [Development and maintenance](docs/development.md)
+- [Casting experiments and validation (16minds-lab)](https://github.com/yukurash/16minds-lab)
+- [Original design background (Qiita, Japanese)](https://qiita.com/yukurash/items/4c4bfc492d91770618b8)
 
 ## License
 
