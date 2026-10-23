@@ -14,6 +14,8 @@ Agent plugins、Skills、custom agentsを扱えるVS CodeとCopilotが必要で�
 copilot plugin install yukurash/16minds-plugin:copilot
 ```
 
+この直接導入は検証したCLIでは動作しますが、将来廃止予定の警告が出ます。対象版と導入経路の制限は[Copilot CLIの導入手順](copilot-cli.md)を確認してください。
+
 VS CodeのAgent Pluginsのインストール済み一覧で`16-minds-writing`を確認し、有効にしてください。公式資料ではCLIで導入されたpluginをVS Codeも検出します。リモート開発の場合は、CLIの導入先とVS Codeの実行場所が同じか確認してください。
 
 ローカル開発時は、VS Codeの`chat.pluginLocations`でclone内の`copilot`ディレクトリを登録する方法もあります。これはユーザー設定の変更になるため、内容を確認して自分で登録してください。
