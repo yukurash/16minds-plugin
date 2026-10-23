@@ -28,6 +28,8 @@ test('shared skill, decision coverage, contract and legacy options remain availa
   for (const term of ['explicit|auto|context', '事実', '責任範囲', '確認', 'エラー', '捏造しない']) {
     assert.ok(policy.includes(term), `Missing contract term: ${term}`);
   }
+  assert.ok(policy.includes('目安の文字数に届かないだけで材料不足とは扱わず'));
+  assert.ok(policy.includes('修正経過の説明は完成文に添えない'));
 });
 
 test('Copilot package is self-contained, portable metadata is valid and versions match', async () => {
