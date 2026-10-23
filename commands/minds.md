@@ -1,5 +1,5 @@
 ---
-description: Get all 16 personality types' opinions on a topic, then synthesize. Usage: /minds [--mode=light|middle|heavy] [--types=a,b,...] [--n=N] [--save] [--out=<path>] <topic>
+description: "Get all 16 personality types' opinions on a topic, then synthesize. Usage: /minds [--mode=light|middle|heavy] [--types=a,b,...] [--n=N] [--save] [--out=<path>] <topic>"
 ---
 
 ユーザーが `/minds` を実行しました。

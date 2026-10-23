@@ -1,5 +1,5 @@
 ---
-description: Get one personality type's opinion on a topic. Usage: /mind <type> [--mode=light|middle|heavy] <topic>
+description: "Get one personality type's opinion on a topic. Usage: /mind <type> [--mode=light|middle|heavy] <topic>"
 ---
 
 ユーザーが `/mind` を実行しました。

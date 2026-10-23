@@ -2,7 +2,7 @@
 
 # 16-minds
 
-A Claude Code plugin that summons agents based on the 16 personality types of MBTI® to debate, review, or advise on any topic.
+A plugin that summons agents based on the 16 personality types of MBTI® to debate, review, advise, or write. Claude Code supports the existing full plugin; GitHub Copilot supports situation-aware writing.
 
 Use it for idea generation, design decisions, life / career choices, code review, ethical dilemmas — anything where opinions are likely to diverge. The premise: diversity of perspective leads to better conclusions.
 
@@ -10,7 +10,17 @@ Use it for idea generation, design decisions, life / career choices, code review
 
 Asking Claude for a review tends to produce balanced, averaged answers. What you usually want is several distinctly-biased perspectives clashing — so you can pick up the angles you'd otherwise have missed. 16-minds defines values, thinking patterns, and tone for each of the 16 types as independent prompts, then hits your topic with them in parallel.
 
-## Install
+## Choose your client
+
+| Client | Scope | Setup and usage |
+|---|---|---|
+| Claude Code | Existing commands and skills, plus automatic writer casting | [Claude Code](docs/claude-code.md) |
+| GitHub Copilot CLI | `voice-write` and 16 writer agents | [Copilot CLI](docs/copilot-cli.md) |
+| VS Code GitHub Copilot | The Copilot writing package | [VS Code Copilot](docs/vscode-copilot.md) |
+
+The guides are in Japanese and include executable command examples. Client-specific agent metadata and invocation are separate; this is not a port of every Claude debate command. Your client's model access and usage limits still apply.
+
+## Install (Claude Code)
 
 ```
 /plugin marketplace add yukurash/16minds-plugin
@@ -38,12 +48,27 @@ Skills that use personalities to write, decide, vote, and ask — where `/mind` 
 
 | Skill | What it does |
 |---|---|
-| `voice-write` | Write in a chosen type's voice, or rewrite AI-generated text |
+| `voice-write` | Write/rewrite as a chosen type, or use `--auto` to cast a writer for the situation |
 | `voice-decide` | Pick one option as a specified type (no fence-sitting) |
 | `voice-vote` | Have a group of types vote yes / no / abstain, judge whether it passes |
 | `voice-ask` | A specified type asks you sharp questions back (no answers, only questions) |
 
 The design rationale — three principles for stripping AI-ness, per-type output comparisons, real use cases for each Skill — is written up in a Qiita article (Japanese) → [記事から "AIっぽさ" をなくす Skills を作成した - Claude Code プラグイン『16-minds』](https://qiita.com/yukurash/items/4c4bfc492d91770618b8)
+
+In v0.4, `voice-write` no longer unconditionally bans neutrality, definitions, headings, or leading with the conclusion. Audience, purpose, and factual fidelity take priority. Existing persona arguments, write/rewrite, formats, and length hints remain supported; the writing style intentionally changes.
+
+### Automatic writer casting
+
+```text
+/16-minds:voice-write --auto --format=reply --show Turn these facts into a team update: <facts>
+/16-minds:voice-write --auto --rewrite --format=post <audience, purpose and draft>
+/16-minds:voice-write infj --rewrite --length=200字 <draft>
+```
+
+These are Claude Code plugin-qualified commands. See the client guides for Copilot invocation.
+`--auto` is opt-in; an explicit persona wins. `--show` separates selection metadata from copyable prose. Missing intent is clarified, unavailable agents fail explicitly, and unsupported facts or commitments must not be invented. Persona fit is a hypothesis, not a measured psychological capability.
+
+See [development instructions](docs/development.md) for generation and structural tests.
 
 ### Command examples
 
